@@ -13,7 +13,7 @@
   import Projection from "ol/proj/Projection";
   import {applyTransform} from "ol/extent";
   import projzh from "projzh";
-  import {OverviewMap, defaults as defaultControl} from 'ol/control';
+  import saveAs from "file-saver";
 
 export default {
   name: "base-map",
@@ -55,20 +55,45 @@ export default {
       center: centerPoint,
       zoom: 11
     });
-    // controls.zoom, controls.overview, controls.switcher, controls.fullScreen
+
+    //设置显示两个滑动地图
+    controls.swipe.addLayer(bingMap);
+    controls.swipe.addLayer(osm, true);
+
+    // 组织控件工具栏
+    controls.controlBar.addControl(controls.fullScreen);
+    controls.controlBar.addControl(controls.wmsCapabilities);
+    controls.controlBar.addControl(controls.zoomToExtend);
+    controls.controlBar.addControl(controls.rotate);
+    controls.controlBar.setPosition('right');
+
+    // 监听点击事件，设置图片保存事件
+    controls.print.on(['print', 'error'], (e) => {
+      e.canvas.toBlob((blob => {
+        saveAs(blob, 'map.' + e.imageType.replace('image/', ''))
+      }), e.imageType);
+    });
+
     new Map({
+      //挂载元素
       target: 'map',
+      //显示的地图
       layers: [baseLayerGroup, vectorLayer],
+      //表层图层
       overlays: [],
-      controls: [controls.zoom, controls.overview, controls.switcher, controls.fullScreen, controls.attr],
+      //在此设置地图控件
+      controls: [controls.zoom, controls.clickOverview, controls.switcher, controls.controlBar, controls.print, controls.legend],
+      //开启交互时加载瓦片
       loadTilesWhileInteracting: true,
+      //地图显示中心
       view: view
     });
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+ @import "../assets/scss/widgets.scss";
   #map {
     height: 100%;
     width: 100%;

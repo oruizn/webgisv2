@@ -1,8 +1,7 @@
-// index中各组件位置
+// 定义变量
 $widget-top: 5rem;
 $widget-left: 1rem;
 $widget-right: 1rem;
-$widget-z-index: 100;
 $widget-5right: 5rem;
 // 缩放控件：右侧
 // ol默认：ol-zoom
@@ -18,7 +17,7 @@ $widget-5right: 5rem;
 .attr-right {
   right: $widget-right;
 }
-
+// 对于原生css文件已经使用的，可以使用initial!important强制初始化
 .legend-right{
   left:initial!important;
   right:$widget-5right;
