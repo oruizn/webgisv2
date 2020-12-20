@@ -1,5 +1,7 @@
 # webgisv2
 
+## Need Node.js Version 12 and more new
+
 ## Project setup
 ```
 npm install
