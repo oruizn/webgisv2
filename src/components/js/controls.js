@@ -47,7 +47,7 @@ export const controls = {
   // 缩放按钮
   // className: 'control-right'
   zoom: new Zoom({
-    duration: 800,
+    duration: 200,
   }),
   // 比例尺
   scale: new ScaleLine({
