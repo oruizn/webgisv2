@@ -36,7 +36,7 @@ export default class Baselayers{
   }
 
   static BingMapLayer(layerName){
-    let apiKey = 'AmSNBECNoG2887KQ6gs5IRDmL0F0x4sBH5kKfTDee4DaEBQPieE8QbIuyy2x-pg_';
+    let apiKey = '申请的key';
     return new TileLayer({
       preload: Infinity,
       baseLayer: true,
